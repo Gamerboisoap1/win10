@@ -1,0 +1,237 @@
+<?php
+// 1. Grade using switch
+echo "1. Grade using switch<br>";
+$marks = 75;
+switch (true) {
+    case ($marks >= 90): echo "Grade: A"; break;
+    case ($marks >= 75): echo "Grade: B"; break;
+    case ($marks >= 50): echo "Grade: C"; break;
+    default: echo "Fail";
+}
+echo "<hr>";
+
+// 2. Sum of first 10 even numbers
+echo "2. Sum of first 10 even numbers<br>";
+$i = 1; $sum = 0; $count = 0;
+while ($count < 10) {
+    if ($i % 2 == 0) {
+        $sum += $i;
+        $count++;
+    }
+    $i++;
+}
+echo "Sum = $sum<hr>";
+
+// 3. Sum of digits
+echo "3. Sum of digits<br>";
+$num = 1234; $sum = 0;
+while ($num > 0) {
+    $sum += $num % 10;
+    $num = (int)($num / 10);
+}
+echo "Sum of digits: $sum<hr>";
+
+// 4. Multiplication table of n
+echo "4. Table of n<br>";
+$n = 5;
+for ($i = 1; $i <= 10; $i++) echo "$n x $i = " . ($n * $i) . "<br>";
+echo "<hr>";
+
+// 5. Multiplication table of 1 to 5
+echo "5. Tables 1 to 5<br>";
+for ($i = 1; $i <= 5; $i++) {
+    echo "Table of $i:<br>";
+    for ($j = 1; $j <= 10; $j++) echo "$i x $j = " . ($i * $j) . "<br>";
+    echo "<br>";
+}
+echo "<hr>";
+
+// 6. Foreach loop on indexed and associative array
+echo "6. Indexed and Associative Arrays<br>";
+$indexed = [1, 2, 3];
+$assoc = ["name" => "Kunal", "age" => 21];
+foreach ($indexed as $val) echo "$val<br>";
+foreach ($assoc as $key => $value) echo "$key: $value<br>";
+echo "<hr>";
+
+// 7. Associative array of student grades
+echo "7. Student Grades<br>";
+$students = ["Kunal" => "A", "Ravi" => "B", "Asha" => "C"];
+foreach ($students as $name => $grade) echo "$name: $grade<br>";
+echo "<hr>";
+
+// 8. Multidimensional array for student records
+echo "8. Student Records<br>";
+$records = [
+    ["Name" => "Kunal", "Roll" => 101, "Marks" => 85],
+    ["Name" => "Asha", "Roll" => 102, "Marks" => 90]
+];
+foreach ($records as $student)
+    echo "Name: {$student['Name']}, Roll: {$student['Roll']}, Marks: {$student['Marks']}<br>";
+echo "<hr>";
+
+// 9. Multidimensional array for user records
+echo "9. User Records<br>";
+$users = [
+    ["Name" => "Kunal", "Email" => "kunal@example.com", "Phone" => "1234567890", "Address" => "Mumbai"],
+    ["Name" => "Ravi", "Email" => "ravi@example.com", "Phone" => "9876543210", "Address" => "Pune"]
+];
+foreach ($users as $user)
+    echo "{$user['Name']}, {$user['Email']}, {$user['Phone']}, {$user['Address']}<br>";
+echo "<hr>";
+
+// 10. String length and word count (manual)
+echo "10. String length and word count<br>";
+$str = "PHP is awesome!";
+echo "Length: " . strlen($str) . "<br>";
+$words = explode(" ", $str);
+echo "Word count: " . count($words) . "<hr>";
+
+// 11. Sum function
+echo "11. Parameterized function<br>";
+function add($a, $b) { return $a + $b; }
+echo "Sum: " . add(5, 10) . "<hr>";
+
+// 12. Anonymous function
+echo "12. Anonymous function<br>";
+$print = function($text) { echo $text; };
+$print("Hello from anonymous function!<hr>");
+
+// 13. Single inheritance
+echo "13. Single inheritance<br>";
+class Student {
+    public $name = "Kunal";
+}
+class Test1 extends Student {
+    public $marks = 85;
+    public function display() {
+        echo "Name: $this->name, Marks: $this->marks";
+    }
+}
+$obj = new Test1();
+$obj->display();
+echo "<hr>";
+
+// 14. Multilevel inheritance
+echo "14. Multilevel inheritance<br>";
+class Tests extends Student {
+    public $test1 = 80;
+    public $test2 = 90;
+}
+class Result extends Tests {
+    public function displayResult() {
+        $avg = ($this->test1 + $this->test2) / 2;
+        echo "Name: $this->name, Average: $avg%";
+    }
+}
+$r = new Result();
+$r->displayResult();
+echo "<hr>";
+
+// 15. Class introspection
+echo "15. Class Introspection<br>";
+class Demo {
+    public $x = 10;
+    function sample() {}
+}
+$obj = new Demo();
+echo "Class: " . get_class($obj) . "<br>";
+echo "Method Exists: " . (method_exists($obj, "sample") ? "Yes" : "No") . "<br>";
+echo "Property Exists: " . (property_exists($obj, "x") ? "Yes" : "No") . "<br>";
+echo "Object Vars: ";
+print_r(get_object_vars($obj));
+echo "<br>Methods: ";
+print_r(get_class_methods($obj));
+echo "<hr>";
+
+// 16. Class product with constructor
+echo "16. Class Product<br>";
+class Product {
+    public $id, $name, $price;
+    public static $total = 0;
+    function __construct($id, $name, $price) {
+        $this->id = $id;
+        $this->name = $name;
+        $this->price = $price;
+        self::$total += $price;
+    }
+}
+new Product(1, "Pen", 10);
+new Product(2, "Book", 50);
+new Product(3, "Bag", 100);
+echo "Total Price: " . Product::$total;
+echo "<hr>";
+
+// 17. Serialize and Unserialize
+echo "17. Serialize and Unserialize<br>";
+$data = ["name" => "Kunal", "age" => 22];
+$serialized = serialize($data);
+echo "Serialized: $serialized<br>";
+$unserialized = unserialize($serialized);
+print_r($unserialized);
+echo "<hr>";
+
+// 18. Registration validation
+echo "18. Registration Form Validation<br>";
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["register"])) {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $phone = $_POST["phone"];
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) echo "Invalid Email<br>";
+    if (strlen($password) < 6) echo "Password too short<br>";
+    if (!preg_match("/^[0-9]{10}$/", $phone)) echo "Invalid Phone<br>";
+    else echo "Validation Passed!<br>";
+}
+?>
+<form method="post">
+    <input type="hidden" name="register" value="1">
+    Email: <input name="email"><br>
+    Password: <input name="password" type="password"><br>
+    Phone: <input name="phone"><br>
+    <input type="submit" value="Validate">
+</form>
+<hr>
+
+<?php
+// 19. Registration form retrieve data
+echo "19. Registration Info Display<br>";
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
+    echo "Name: " . $_POST["name"] . "<br>";
+    echo "Email: " . $_POST["email"] . "<br>";
+    echo "Phone: " . $_POST["phone"] . "<br>";
+}
+?>
+<form method="post">
+    <input type="hidden" name="submit" value="1">
+    Name: <input name="name"><br>
+    Email: <input name="email"><br>
+    Phone: <input name="phone"><br>
+    <input type="submit" value="Submit">
+</form>
+<hr>
+
+<?php
+// 20. Student MySQL Insert, Display, Update, Delete
+echo "20. Student MySQL CRUD (see code)<br>";
+/*
+$conn = new mysqli("localhost", "root", "", "school");
+$conn->query("INSERT INTO students (name, marks) VALUES ('Kunal', 85)");
+$res = $conn->query("SELECT * FROM students");
+while ($row = $res->fetch_assoc()) echo $row["id"] . ": " . $row["name"] . " - " . $row["marks"] . "<br>";
+$conn->query("UPDATE students SET marks=90 WHERE name='Kunal'");
+$conn->query("DELETE FROM students WHERE name='Kunal'");
+$conn->close();
+*/
+echo "<hr>";
+
+// 21. MySQL Display and Delete
+echo "21. MySQL Display and Delete (see code)<br>";
+/*
+$conn = new mysqli("localhost", "root", "", "school");
+$res = $conn->query("SELECT * FROM students");
+while ($row = $res->fetch_assoc()) echo $row["id"] . ": " . $row["name"] . " - " . $row["marks"] . "<br>";
+$conn->query("DELETE FROM students WHERE id=1");
+$conn->close();
+*/
+?>
